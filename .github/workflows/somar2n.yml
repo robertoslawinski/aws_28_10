@@ -1,12 +1,22 @@
-name: Executar script DB
+name: Executar soma (somar2n.py)
 
 on:
   workflow_dispatch:
+    inputs:
+      v1:
+        description: "Primeiro número (inteiro)"
+        required: true
+        type: string
+        default: "10"
+      v2:
+        description: "Segundo número (inteiro)"
+        required: true
+        type: string
+        default: "20"
 
 jobs:
-  run-db:
+  run-soma:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -14,10 +24,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
 
-      - name: Install PyYAML
-        run: pip install pyyaml
-
-      - name: Run database script
-        run: python basededados.py
+      - name: Run somar2n.py com inputs
+        run: |
+          python somar2n.py "${{ inputs.v1 }}" "${{ inputs.v2 }}"
