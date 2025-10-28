@@ -1,0 +1,23 @@
+name: Run Python Script
+
+on:
+  workflow_dispatch:           # permite rodar manualmente
+  push:
+    branches: [ main ]         # (opcional) roda a cada push na main
+
+jobs:
+  run-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run app.py with arguments
+        run: |
+          python app.py "execucao via actions" 123
