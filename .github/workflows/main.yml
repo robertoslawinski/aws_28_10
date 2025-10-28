@@ -1,27 +1,32 @@
-name: Run Python Script (with inputs)
+name: Run Python Script (with environments)
 
 on:
   workflow_dispatch:
     inputs:
+      Ambiente:
+        description: "Escolha o ambiente de deploy"
+        type: environment
+        required: true
       Nome:
-        description: "Nome próprio"
+        description: "Seu nome"
         required: true
       Apelido:
-        description: "Apelido / Sobrenome"
+        description: "Seu sobrenome"
         required: true
       Cidade:
         description: "Cidade"
         type: choice
-        required: true
         options:
           - Lisboa
           - Braga
           - Porto
           - Coimbra
+        required: true
 
 jobs:
   run-app:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.Ambiente }}
 
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +35,10 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run exemplo.py with inputs
+      - name: Print selected environment
+        run: |
+          echo "Ambiente selecionado = ${{ inputs.Ambiente }}"
+
+      - name: Run exemplo.py with arguments
         run: |
           python exemplo.py "${{ inputs.Nome }}" "${{ inputs.Apelido }}" "${{ inputs.Cidade }}"
