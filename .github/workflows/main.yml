@@ -30,11 +30,11 @@ on:
         default: Lisboa
       Ambiente:
         description: "Ambiente de execução"
-        type: environment     # <- faz aparecer dropdown com staging/prod
+        type: environment      
 
 jobs:
   run-app:
-    # O nome do environment vem do input; ativa proteção/aprovação do STAGING
+   
     environment: ${{ inputs.Ambiente }}
     runs-on: ubuntu-latest
 
@@ -54,7 +54,7 @@ jobs:
           echo "Apelido: ${{ inputs.Apelido }}"
           echo "Confirme: ${{ inputs.Confirme }}"
           echo "Cidade: ${{ inputs.Cidade }}"
-          # Se criou secret no ambiente, ele só estará disponível aqui:
+         
           echo "Tem APP_TOKEN? ${{ secrets.APP_TOKEN != '' && 'sim' || 'nao' }}"
 
       - name: Run exemplo.py with inputs
