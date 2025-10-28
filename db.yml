@@ -1,0 +1,4 @@
+servidor: "mysql.seuservidor.com"
+utilizador: "aluno"
+senha: "1234"
+base_de_dados: "cursocesae"
