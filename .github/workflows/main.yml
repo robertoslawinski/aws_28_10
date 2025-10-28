@@ -1,41 +1,32 @@
 name: Run Python Script (with inputs)
 
 on:
-  # Mostra o formulário na aba Actions
   workflow_dispatch:
     inputs:
       Nome:
         description: "Nome próprio"
         required: true
-        default: "Roberto"
       Apelido:
         description: "Apelido / Sobrenome"
         required: true
-        default: "Slawinski"
       Cidade:
         description: "Cidade"
         type: choice
+        required: true
         options:
           - Lisboa
           - Braga
           - Porto
           - Coimbra
-        default: Lisboa
-
-  # (opcional) também roda a cada push na main
-  push:
-    branches: [ main ]
 
 jobs:
   run-app:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
